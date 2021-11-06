@@ -59,13 +59,24 @@ body {
         padding: 40vh 0;
         font-size: 64px;
         color: #000;
+        transition: all 0.8s;
+        opacity: 0;
         transition: background 0.8s ease, border 0.4s ease;
         &.isVisible {
-        
+            -webkit-animation: fadein 3s;
+            /* Safari, Chrome and Opera > 12.1 */
+            -moz-animation: fadein 3s;
+            /* Firefox < 16 */
+            -ms-animation: fadein 3s;
+            /* Internet Explorer */
+            -o-animation: fadein 3s;
+            /* Opera < 12.1 */
+            animation: fadein 3s;
+            opacity: 1;
+            transition-delay: 0.3s;
             color: #fff;
         }
         h5{
-            animation: fadein;
             font-size: 64px;
             @media screen and (max-width:769px){
                 font-size: 60px;
