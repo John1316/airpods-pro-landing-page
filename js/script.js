@@ -86,17 +86,7 @@ setInterval(() => {
 // 33.3 will be the interval of each frame
 // AIrpods is in 30fps, so 1 sec = 30 frames => 1000 milliseconds = 30 frames
 // That implies 33.3 milliseconds would be great for each frame
-// swiper lsider
-var swiper = new Swiper(".mySwiper", {
-	direction: "vertical",
-	effect: "fade",
-	fadeEffect: { 
-		delay: 2500,
-		crossFade: true },
-	mousewheel: {
-	  	releaseOnEdges: true
-	}
-});
+
 const currentFrame = index => (
     `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index.toString().padStart(4, '0')}.jpg`
 )
@@ -128,3 +118,33 @@ window.addEventListener("scroll",()=>{
     requestAnimationFrame(() => updateImage(frameIndex +1))
 })
 preLoadImage();
+const options = {
+	root: null, // use the document's viewport as the container
+	rootMargin: '0px', // % or px - offsets added to each side of the intersection 
+	threshold: 0.5 // percentage of the target element which is visible
+  }
+  
+  // Callback docs: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Targeting_an_element_to_be_observed
+  let callback = (entries) => { 
+	  entries.forEach(entry => {
+		  
+		  // If entry (box) is visible - according with the params set in `options`
+		  // then adds `isVisible` class to box
+		  // otherwise removes `isVisible` class
+		  
+		  if(entry.isIntersecting) {
+			  entry.target.classList.add('isVisible');
+		  } else {
+			  entry.target.classList.remove('isVisible');		
+		  }
+  
+	  });
+  }
+  
+  // Create the intersection observer instance by calling its constructor and passing it a
+  // callback function to be run whenever a threshold is crossed in one direction or the other:
+  let observer = new IntersectionObserver(callback, options);
+  
+  // Get all the `.description` from DOM and attach the observer to these
+  document.querySelectorAll('.description')
+	  .forEach(description => { observer.observe(description) });
