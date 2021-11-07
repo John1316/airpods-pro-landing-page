@@ -49,27 +49,7 @@ let text2Scene = new ScrollMagic.Scene({
 })
 	.setTween(text2Animation)
 	.addTo(controller);
-// const textAnim3 = TweenMax.fromTo(end, 100, {color: 'black'}, {color: 'blue'})
-// let scene3 = new ScrollMagic.Scene({
-// 	duration: 3000,
-// 	triggerElement: section,
-// 	triggerHook: 0.5
-// })
-// //.addIndicators()
-// .setTween(textAnim3)
-// // .setPin(section)
-// .addTo(controller);
 
-// const textAnim4 = TweenMax.fromTo(end, 100, {opacity: '0'}, {opacity: '1'})
-// let scene4 = new ScrollMagic.Scene({
-// 	duration: 3000,
-// 	triggerElement: section,
-// 	triggerHook: 0
-// })
-// //.addIndicators()
-// .setTween(textAnim4)
-// .setPin(section)
-// .addTo(controller);
 // airPods Animation
 let accelerationRate = 0.1;
 let scrollPosition = 0;
@@ -87,9 +67,13 @@ setInterval(() => {
 // AIrpods is in 30fps, so 1 sec = 30 frames => 1000 milliseconds = 30 frames
 // That implies 33.3 milliseconds would be great for each frame
 
+/* sequence image */
+
+// frame and link of the airpod sequence image
 const currentFrame = index => (
     `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index.toString().padStart(4, '0')}.jpg`
 )
+// loop on sequence
 const preLoadImage = () => {
     for (let i = 0; i < frameCount; i++) {
         const img = new Image();
@@ -97,6 +81,7 @@ const preLoadImage = () => {
         
     }
 } 
+// max framecount
 const frameCount = 147;
 canvas.height= 758;
 canvas.width= 1200;
@@ -105,10 +90,12 @@ img.src = currentFrame(1);
 img.onload = function() {
     context.drawImage(img,0,0)
 }
+// update on scroll
 const updateImage = index => {
     img.src = currentFrame(index)
     context.drawImage(img, 0 , 0)
 }
+// scroll function
 window.addEventListener("scroll",()=>{
     const heading = document.querySelector(".heading1");
     const scrollTop = html.scrollTop;
@@ -118,6 +105,8 @@ window.addEventListener("scroll",()=>{
     requestAnimationFrame(() => updateImage(frameIndex +1))
 })
 preLoadImage();
+
+/* animation on last section on description */
 const options = {
 	root: null, // use the document's viewport as the container
 	rootMargin: '0px', // % or px - offsets added to each side of the intersection 
