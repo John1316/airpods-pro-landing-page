@@ -1,11 +1,11 @@
 //  Intro Section
 const html = document.documentElement;
-const canvas = document.querySelector('#hero-lightpass');
+const canvas = document.querySelector('#airpodsImage');
 const context = canvas.getContext('2d');
 
 
 const intro = document.querySelector(".intro");
-const airPods = intro.querySelector("#hero-lightpass");
+const airPods = intro.querySelector("#airpodsImage");
 const text1 = intro.querySelector("#title");
 const text2 = intro.querySelector("#text2");
 
